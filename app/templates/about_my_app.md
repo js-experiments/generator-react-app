@@ -1,0 +1,1 @@
+##About <%= _.capitalize(applicationName) %>

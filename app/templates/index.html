@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <title><%= _.capitalize(applicationName) %></title>
+  <meta name="description" content="react application">
+  <meta name="author" content="John Doe">
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" href="js/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="js/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
+
+  <!-- Favicons
+  ================================================== -->
+  <!--
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  <style>
+    .jumbotron {
+      color: #000000;
+      background-color: whitesmoke;
+      border-radius: 0px;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="jumbotron">
+    <h1><%= applicationName %></h1>
+    <p>
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <about class="about_my_app"></about>
+      </div>
+      <div class="col-md-6">
+        <about class="about_how_to"></about>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script data-main="js/main" src="js/bower_components/requirejs/require.js"></script>
+</body>
+</html>

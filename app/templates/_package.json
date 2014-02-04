@@ -1,0 +1,28 @@
+{
+	"name": "hello-<%= _.slugify(applicationName) %>",
+	"description" : "this is a killer app",
+	"version": "0.0.0",
+	"repository" : {
+		"type" : "git",
+		"url" : "https://github.com/you/yourapp.git"
+	},
+	"license" : "MIT",
+	"author" : {
+		"name" : "your name",
+		"twitter" : "@your_twitter_pseudo",
+		"url" : "http://www.your.site"
+	},
+
+	"dependencies": {
+		"express": "x.x",
+		"mongoose": "x.x",
+		"node-uuid" : "x.x",
+		"faker": "x.x",
+		"backbone": "x.x",
+		"jasmine-node": "x.x",
+		"request": "x.x",
+		"easymongo": "x.x"
+	}
+}
+
+
