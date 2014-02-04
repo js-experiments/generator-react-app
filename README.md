@@ -1,4 +1,4 @@
-# generator-react-app [![Build Status](https://secure.travis-ci.org/k33g/generator-react-app.png?branch=master)](https://travis-ci.org/k33g/generator-react-app)
+# generator-react-app
 
 A generator for [Yeoman](http://yeoman.io).
 
