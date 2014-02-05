@@ -23,13 +23,14 @@ ReactAppGenerator.prototype.askFor = function askFor() {
   // have Yeoman greet the user.
   console.log(this.yeoman);
 
-	var prompts = [{
-		name : "applicationName",
-		message : "Please : Application name?"
-	}];
+	var prompts = [
+		{name : "applicationName", message : "Application name?"},
+		{name : "dataBaseName", message : "DataBase name?"}
+	];
 
 	this.prompt(prompts, function (props) {
 		this.applicationName = props.applicationName;
+		this.dataBaseName = props.dataBaseName;
 
 		cb();
 	}.bind(this));
@@ -38,6 +39,7 @@ ReactAppGenerator.prototype.askFor = function askFor() {
 ReactAppGenerator.prototype.app = function app() {
 	this.mkdir("public");
 	this.mkdir("public/js");
+	this.mkdir("public/js/models");
 	this.mkdir("public/js/application");
 	this.mkdir("public/js/components");
 	this.mkdir("public/js/docs");
