@@ -4,6 +4,7 @@ define([
 ], function(Backbone){
 
 	var <%= name %> = Backbone.Model.extend({
+		idAttribute: "_id",
 		defaults : function (){
 			return {
 				<%= defaultValues %>

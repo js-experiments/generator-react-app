@@ -21,7 +21,8 @@ ReactAppGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // have Yeoman greet the user.
-  console.log(this.yeoman);
+  // console.log(this.yeoman);
+	console.log("Hi! This is a React-BackBone-Express Generator :) Enjoy!")
 
 	var prompts = [
 		{name : "applicationName", message : "Application name?"},
@@ -61,6 +62,7 @@ ReactAppGenerator.prototype.app = function app() {
 
 	//express part
 	this.template('app.js', "app.js");
+	this.copy('all.routes.js', "all.routes.js");
 
 
 };

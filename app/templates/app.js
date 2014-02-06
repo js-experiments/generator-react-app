@@ -22,4 +22,4 @@ db.once('open', function callback () {
 });
 
 app.listen(args[0] || 3000);
-console.log("Listening")
+console.log("Listening on 3000")

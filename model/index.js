@@ -8,11 +8,39 @@ var ModelGenerator = module.exports = function ModelGenerator(args, options, con
   // as `this.name`.
   yeoman.generators.NamedBase.apply(this, arguments);
 
-	//'{"name":"bob","sam":"toto"}'
-
   console.log('Create Model ' + this.name + ' and Collection ' + this.name+"s");
 
-	//console.log(JSON.parse(this.name));
+	this.on('end', function () {
+
+		var fs = require('fs');
+
+		// read all routes files for update all.routes.js
+		var files = fs.readdirSync('./routes');
+		var routes = [];
+		files.filter(function(file) { return file.substr(-10) == '.routes.js'; })
+			.forEach(function(file) {
+				if (file!=="all.routes.js"){
+					console.log("==>", file, 'require("./routes/'+file.split(".js")[0]+'")(app, mongoose);')
+					routes.push('require("./routes/'+file.split(".js")[0]+'")(app, mongoose);')
+				}
+			});
+		console.log("Updating routes ...")
+		console.log(routes)
+
+		var stream = fs.createWriteStream("all.routes.js");
+		stream.once('open', function(fd) {
+			stream.write("var AllRoutes = function(app, mongoose) {\n");
+			routes.forEach(function(line){
+				stream.write("  "+line+"\n");
+			});
+			stream.write("}\n");
+			stream.write("module.exports = AllRoutes;\n");
+			stream.end();
+		});
+
+		console.log("Routes updated ...")
+
+	});
 
 };
 
@@ -24,7 +52,8 @@ ModelGenerator.prototype.askFor = function askFor() {
 	var prompts = [
 		{name : "defaultValues", message : 'default values of BB model (ie: title:"my life",author:"john doe")?'},
 		{name : "url", message : "url?"},
-		{name : "schema", message : "mongoose schema (ie: name: String, remark: String)?"}
+		{name : "schema", message : "mongoose schema (ie: name: String, remark: String)?"},
+		{name : "fields", message : "fields (for UI) (title, author)?"}
 	];
 
 	this.routes = [];
@@ -34,6 +63,11 @@ ModelGenerator.prototype.askFor = function askFor() {
 		this.url = props.url;
 		this.schema = props.schema;
 
+		this.fields = []
+		props.fields.split(",").forEach(function(item) {
+			this.fields.push(item.trim());
+		}.bind(this))
+
 		cb();
 
 	}.bind(this));
@@ -41,40 +75,13 @@ ModelGenerator.prototype.askFor = function askFor() {
 
 ModelGenerator.prototype.files = function files() {
 
-	//console.log(JSON.parse("{"+this.defaultValues+"}"))
+	this.mkdir("routes");
 
-	var fs = require('fs');
+	this.template('routes.js', "routes/"+this.name+"s.routes.js");
 
-	var files = fs.readdirSync('./');
-	files.filter(function(file) { return file.substr(-10) == '.routes.js'; })
-		.forEach(function(file) {
-
-			if (file!=="all.routes.js"){
-				console.log("==>", file, 'require("./'+file.split(".js")[0]+'")(app, mongoose);')
-				this.routes.push('require("./'+file.split(".js")[0]+'")(app, mongoose);')
-			}
-		}.bind(this));
-
-	/*
-	fs.readdir('./', function(err, files) {
-
-		files.filter(function(file) { return file.substr(-10) == '.routes.js'; })
-			.forEach(function(file) {
-
-				if (file!=="all.routes.js"){
-					console.log("==>", file, 'require("./'+file.split(".js")[0]+'")(app, mongoose);')
-					this.routes.push('require("./'+file.split(".js")[0]+'")(app, mongoose);')
-				}
-			}.bind(this));
-	}.bind(this));
-	*/
-
-	console.log(this.routes)
-
-	this.template('routes.js', this.name+"s.routes.js");
-
-	this.template('all.routes.js', "all.routes.js");
-
-  this.template('model.js', "public/js/models/"+this.name+".js");
+	this.template('model.js', "public/js/models/"+this.name+".js");
 	this.template('collection.js', "public/js/models/"+this.name+"s.js");
+	this.template('form.js',"public/js/components/"+this.name+"Form.js")
+	this.template('list.js',"public/js/components/"+this.name+"sList.js")
+
 };
