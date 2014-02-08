@@ -17,10 +17,7 @@
 		"express": "x.x",
 		"mongoose": "x.x",
 		"node-uuid" : "x.x",
-		"faker": "x.x",
-		"backbone": "x.x",
-		"jasmine-node": "x.x",
-		"request": "x.x"
+		"faker": "x.x"
 	}
 }
 

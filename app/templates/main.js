@@ -3,8 +3,7 @@ requirejs.config({
 	paths   : {
 		"domReady"      : "bower_components/domready/ready.min",
 		"jquery"        : "bower_components/jquery/jquery.min",
-		"underscore"    : "bower_components/underscore-amd/underscore-min", /*This is amd version of underscore */
-		"backbone"      : "bower_components/backbone-amd/backbone-min",   /*This is amd version of backbone   */
+		"bootstrap"     : "bower_components/bootstrap/dist/js/bootstrap.min",
 		"text"          : "bower_components/text/text",
 		"showdown"      : "bower_components/showdown/compressed/showdown",
 		"jsx"           : "bower_components/require-jsx/jsx",
@@ -12,6 +11,9 @@ requirejs.config({
 		"react"         : "bower_components/react/react.min"
 	},
 	shim: {
+		JSXTransformer:{
+			exports: "JSXTransformer"
+		},
 		"bootstrap": {
 			deps: ["jquery"]
 		},
@@ -23,15 +25,13 @@ requirejs.config({
 
 require([
 	'domReady',
-	'jsx!application/Application',
-	'backbone'
-], function (domReady, Application, Backbone) {
+	'jsx!application/Application'
+], function (domReady, Application) {
 
 	domReady(function () {
 		console.log("DOM is ready!");
 		//$('body').css('visibility', 'visible');
 		window.App = new Application();
-		Backbone.history.start();
 	});
 
 });

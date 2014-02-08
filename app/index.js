@@ -22,7 +22,12 @@ ReactAppGenerator.prototype.askFor = function askFor() {
 
   // have Yeoman greet the user.
   // console.log(this.yeoman);
-	console.log("Hi! This is a React-BackBone-Express Generator :) Enjoy!")
+	console.log(" _____             _       _____          ");
+	console.log("| __  |___ ___ ___| |_ ___|  _  |___ ___  ");
+	console.log("|    -| -_| .'|  _|  _|___|     | . | . | ");
+	console.log("|__|__|___|__,|___|_|     |__|__|  _|  _| ");
+	console.log("                                |_| |_|   ");
+	console.log("Hi! This is a React-Express-Mongoose Generator :) Enjoy!");
 
 	var prompts = [
 		{name : "applicationName", message : "Application name?"},
@@ -40,17 +45,20 @@ ReactAppGenerator.prototype.askFor = function askFor() {
 ReactAppGenerator.prototype.app = function app() {
 	this.mkdir("public");
 	this.mkdir("public/js");
-	this.mkdir("public/js/models");
+
 	this.mkdir("public/js/application");
 	this.mkdir("public/js/components");
 	this.mkdir("public/js/docs");
 
+	this.mkdir("db");
+	this.template("db.js", "db/db.js");
+
 
 	this.template('index.html', "public/index.html");
-	this.template('main.js', "public/js/main.js");
 	this.template('Application.js', "public/js/application/Application.js");
-
 	this.template('About.js', "public/js/components/About.js");
+	this.copy("all.components.js", "public/js/components/all.components.js")
+
 	this.template('about_my_app.md', "public/js/docs/about_my_app.md");
 	this.template('about_how_to.md', "public/js/docs/about_how_to.md");
 

@@ -3,14 +3,7 @@
 	"version": "0.0.0",
 	"dependencies": {
 		"jquery" : "x.x",
-		"backbone-amd" : "x.x",
-		"underscore-amd" : "x.x",
-		"jasmine" : "x.x",
-		"requirejs" : "x.x",
-		"text" : "x.x",
 		"react" : "",
-		"require-jsx" : "",
-		"domready" : "",
 		"showdown" : "",
 		"bootstrap" : "x.x"
 	}

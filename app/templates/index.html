@@ -12,34 +12,28 @@
   <link rel="stylesheet" href="js/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="js/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 
-  <style>
-    .jumbotron {
-      padding-top :15px;
-      padding-bottom :15px;
-      color: #000000;
-      background-color: whitesmoke;
-      border-radius: 0px;
-    }
-  </style>
-
 </head>
 <body>
-  <div class="jumbotron">
+  <div class="container">
     <h1><%= applicationName %></h1>
-    <p>
-    </p>
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
-        <about class="about_my_app"></about>
+      <div class="col-md-6 about_my_app">
       </div>
-      <div class="col-md-6">
-        <about class="about_how_to"></about>
+      <div class="col-md-6 about_how_to">
       </div>
     </div>
   </div>
 
-  <script data-main="js/main" src="js/bower_components/requirejs/require.js"></script>
+  <script src="js/bower_components/jquery/jquery.min.js"></script>
+  <script src="js/bower_components/react/JSXTransformer.js"></script>
+  <script src="js/bower_components/react/react.min.js"></script>
+  <script src="js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/bower_components/showdown/src/showdown.js"></script>
+
+  <script src="js/components/all.components.js"></script>
+
+  <script type="text/jsx" src="js/application/Application.js"></script>
 </body>
 </html>
