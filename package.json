@@ -1,15 +1,15 @@
 {
   "name": "generator-react-app",
   "version": "0.0.0",
-  "description": "A generator for Yeoman",
+  "description": "A generator for Yeoman with React, jQuery, Bootstrap, Express and Mongoose",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator", "react", "bootstrap", "mongoose", "express", "jquery"
   ],
   "homepage": "https://github.com/k33g/generator-react-app",
   "bugs": "https://github.com/k33g/generator-react-app/issues",
   "author": {
-    "name": "Philippe CHARRIERE",
-    "email": "",
+    "name": "@k33g_org",
+    "email": "ph.charriere@gmail.com",
     "url": "https://github.com/k33g"
   },
   "main": "app/index.js",
