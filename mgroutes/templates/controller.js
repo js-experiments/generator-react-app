@@ -20,7 +20,8 @@ var <%= name %>sCtrl = {
 		});
 	},
 	update : function(req, res) {
-		<%= name %>.findOneAndUpdate({_id:req.params.id}, req.body, function (err, <%= _.slugify(name) %>) {
+		delete req.body._id
+		<%= name %>.update({_id:req.params.id}, req.body, function (err, <%= _.slugify(name) %>) {
 			res.send(<%= _.slugify(name) %>);
 		});
 	},
