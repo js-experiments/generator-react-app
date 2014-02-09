@@ -1,6 +1,6 @@
 {
   "name": "generator-react-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A generator for Yeoman with React, jQuery, Bootstrap, Express and Mongoose",
   "keywords": [
     "yeoman-generator", "react", "bootstrap", "mongoose", "express", "jquery"
