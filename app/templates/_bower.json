@@ -5,7 +5,9 @@
 		"jquery" : "x.x",
 		"react" : "",
 		"showdown" : "",
-		"bootstrap" : "x.x"
+		"bootstrap" : "x.x",
+		"backbone" : "x.x",
+		"underscore" : "x.x"
 	}
 }
 

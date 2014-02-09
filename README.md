@@ -7,6 +7,20 @@ What can i do with it ?
 - generate single page application with [React](http://facebook.github.io/react/index.html), jQuery and Bootstrap.
 - generate Mongoose + Express project
 - generate some React components (some linked to data source) (more to come)
+- generate some React components linked to Backbone Models or Collections (more to come)
+
+##Sub generators list :
+
+- `yo react-app:mgroutes Human` : generate express routes, mongoose Human Model, Human Controller
+- `yo react-app:form HumanForm div Human` : generate a form linked to Human data
+- `yo react-app:table HumansTable div Human` : generate a table linked to Human data
+- `yo react-app:list HumansList div Human` : generate a list(`<ul></ul>`) linked to Human data
+- `yo react-app:bbmc Human` generate Backbone a Human Model and Collection.js
+- `yo react-app:tablebb HumansTableBb div Human` generate a table linked to a Backbone Human Collection
+- `yo react-app:formbb HumanFormBb div Human` generate a form linked to a Backbone Human Model
+- `yo react-app:listbb HumansListBb div Human` generate a list linked to a Backbone Human Collection
+- `yo react-app:tab ApplicationTab div` create a "Bootstrap" Tab (and tab panes) inside a container (ie:`div`)
+- `yo react-app:shell MyComponent div` create a React Component skeleton
 
 
 ##Getting Started
@@ -139,7 +153,7 @@ You can now re-start `node app.js`. That's All!
 - Shell : `yo react-app:shell MyComponent div` create a React Component skeleton
 - **more to come** ... WIP
 
-**Remark**: all components are generated to the `public/js/components` directory. Each time, `public/js/components/all.components.js` file is automatically updated (to load components)
+**Remark**: all components are generated to the `public/js/components` directory. Each time, `public/js/all.scripts.js` file is automatically updated (to load components)
 
 ###Shell sample :
 
@@ -247,6 +261,15 @@ By
     </div>
 
 That's all
+
+##Backbone generators
+
+- Model and Collection : `yo react-app:bbmc Human` generate `public/models/HumanModel.js` and `public/models/HumansCollection.js`
+- Table : `yo react-app:tablebb HumansTableBb div Human` create a data table linked to `HumansCollection` (Backbone collection)
+- Form : `yo react-app:formbb HumanFormBb div Human` create a form linked to `HumanModel` (Backbone Model)
+- List : `yo react-app:listbb HumansListBb div Human` create a list linked to `HumansCollection` (Backbone collection)
+
+**Remark**: Each time, `public/js/all.scripts.js` file is automatically updated
 
 ## License
 

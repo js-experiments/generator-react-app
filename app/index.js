@@ -50,6 +50,8 @@ ReactAppGenerator.prototype.app = function app() {
 	this.mkdir("public/js/components");
 	this.mkdir("public/js/docs");
 
+	this.mkdir("public/js/models");
+
 	this.mkdir("db");
 	this.template("db.js", "db/db.js");
 
@@ -57,7 +59,8 @@ ReactAppGenerator.prototype.app = function app() {
 	this.template('index.html', "public/index.html");
 	this.template('Application.js', "public/js/application/Application.js");
 	this.template('About.js', "public/js/components/About.js");
-	this.copy("all.components.js", "public/js/components/all.components.js")
+
+	this.copy("all.scripts.js", "public/js/all.scripts.js")
 
 	this.template('about_my_app.md', "public/js/docs/about_my_app.md");
 	this.template('about_how_to.md', "public/js/docs/about_how_to.md");
