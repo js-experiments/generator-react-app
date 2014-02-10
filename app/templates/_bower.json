@@ -2,12 +2,12 @@
 	"name": "<%= _.slugify(applicationName) %>",
 	"version": "0.0.0",
 	"dependencies": {
-		"jquery" : "x.x",
-		"react" : "",
-		"showdown" : "",
-		"bootstrap" : "x.x",
-		"backbone" : "x.x",
-		"underscore" : "x.x"
+		"jquery" : null,
+		"react" : null,
+		"showdown" : null,
+		"bootstrap" : null,
+		"backbone" : null,
+		"underscore" : null
 	}
 }
 
