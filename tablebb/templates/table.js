@@ -17,7 +17,7 @@ var <%= componentName %> = React.createClass({
 
 		this.<%= _.slugify(modelName) %>sCollection.fetch({
 			success: function(<%= _.slugify(modelName) %>s){
-				this.setState({data : <%= _.slugify(modelName) %> s.toJSON(), message : Date()});
+				this.setState({data : <%= _.slugify(modelName) %>s.toJSON(), message : Date()});
 			}.bind(this),
 				error : function(err) {
 				this.setState({
