@@ -54,14 +54,12 @@ ReactAppGenerator.prototype.app = function app() {
 	this.mkdir("public/js/modules/models");
 	this.mkdir("public/js/react_components");
 
-	this.mkdir("public/js/shims");
+	//this.mkdir("public/js/shims");
 
 	/*=== "static" assets ===*/
 	this.template('index.html', "public/index.html");
 	this.template('main.js', "public/js/modules/main.js");
 	this.template('About.js', "public/js/react_components/About.js");
-
-	this.copy("showdown.shim.js", "public/js/shims/showdown.shim.js");
 
 	/*=== back side structure ===*/
 
