@@ -43,27 +43,39 @@ ReactAppGenerator.prototype.askFor = function askFor() {
 };
 
 ReactAppGenerator.prototype.app = function app() {
+
+	/*=== front side structure ===*/
 	this.mkdir("public");
 	this.mkdir("public/js");
 
-	this.mkdir("public/js/application");
-	this.mkdir("public/js/components");
 	this.mkdir("public/js/docs");
 
-	this.mkdir("public/js/models");
+	this.mkdir("public/js/modules");
+	this.mkdir("public/js/modules/models");
+	this.mkdir("public/js/react_components");
+
+	this.mkdir("public/js/shims");
+
+	/*=== "static" assets ===*/
+	this.template('index.html', "public/index.html");
+	this.template('main.js', "public/js/modules/main.js");
+	this.template('About.js', "public/js/react_components/About.js");
+
+	this.copy("showdown.shim.js", "public/js/shims/showdown.shim.js");
+
+	/*=== back side structure ===*/
 
 	this.mkdir("db");
+
+	/*=== "dynamic" assets ===*/
+
 	this.template("db.js", "db/db.js");
-
-
-	this.template('index.html', "public/index.html");
-	this.template('Application.js', "public/js/application/Application.js");
-	this.template('About.js', "public/js/components/About.js");
-
-	this.copy("all.scripts.js", "public/js/all.scripts.js")
 
 	this.template('about_my_app.md', "public/js/docs/about_my_app.md");
 	this.template('about_how_to.md', "public/js/docs/about_how_to.md");
+
+
+	this.copy("Gruntfile.js", "Gruntfile.js");
 
 	this.template('_bower.json', "bower.json");
 	this.template('bowerrc', ".bowerrc");
@@ -71,10 +83,11 @@ ReactAppGenerator.prototype.app = function app() {
 	this.template('_package.json', "package.json");
 	this.copy('gitignore', ".gitignore");
 
+	this.template('README.md', 'README.md');
+
 	//express part
 	this.template('app.js', "app.js");
 	this.copy('all.routes.js', "all.routes.js");
-
 
 };
 

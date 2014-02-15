@@ -5,12 +5,10 @@ var yeoman = require('yeoman-generator');
 var ListbbGenerator = module.exports = function ListbbGenerator(args, options, config) {
   yeoman.generators.NamedBase.apply(this, arguments);
 	this.componentName = arguments[0][0];
-	this.tagName = arguments[0][1];
-	this.modelName = arguments[0][2];
+	//this.tagName = arguments[0][1];
+	this.modelName = arguments[0][1];
 
-	this.on('end', function () {
-		require("../tools").scriptsList();
-	});
+	//this.on('end', function () { });
 };
 
 util.inherits(ListbbGenerator, yeoman.generators.NamedBase);
@@ -50,5 +48,5 @@ ListbbGenerator.prototype.askFor = function askFor() {
 
 
 ListbbGenerator.prototype.files = function files() {
-	this.template('list.js',"public/js/components/"+this.componentName+".js")
+	this.template('list.js',"public/js/react_components/"+this.componentName+".js")
 };

@@ -5,12 +5,10 @@ var yeoman = require('yeoman-generator');
 var FormbbGenerator = module.exports = function FormbbGenerator(args, options, config) {
 	yeoman.generators.NamedBase.apply(this, arguments);
 	this.componentName = arguments[0][0];
-	this.tagName = arguments[0][1];
-	this.modelName = arguments[0][2];
+	//this.tagName = arguments[0][1];
+	this.modelName = arguments[0][1];
 
-	this.on('end', function () {
-		require("../tools").scriptsList();
-	});
+	//this.on('end', function () { });
 };
 
 util.inherits(FormbbGenerator, yeoman.generators.NamedBase);
@@ -41,6 +39,6 @@ FormbbGenerator.prototype.askFor = function askFor() {
 
 
 FormbbGenerator.prototype.files = function files() {
-	this.template('form.js',"public/js/components/"+this.componentName+".js")
+	this.template('form.js',"public/js/react_components/"+this.componentName+".js")
 
 };

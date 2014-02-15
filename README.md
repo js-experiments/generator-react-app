@@ -4,23 +4,24 @@ A generator for [Yeoman](http://yeoman.io).
 
 What can i do with it ?
 
-- generate single page application with [React](http://facebook.github.io/react/index.html), jQuery and Bootstrap.
+- generate single page application with [React](http://facebook.github.io/react/index.html), jQuery, Backbone and Bootstrap.
+- it uses [Browserifiy](http://browserify.org/)
+- it uses Grunt with **grunt-browserify** and **grunt-contrib-watch**
 - generate Mongoose + Express project
-- generate some React components (some linked to data source) (more to come)
-- generate some React components linked to Backbone Models or Collections (more to come)
+- generate some React "bootstrapped" components ("skeleton" component, tabulation) (more to come)
+- generate some React "bootstrapped" components linked to Backbone Models or Collections (more to come)
 
 ##Sub generators list :
 
 - `yo react-app:mgroutes Human` : generate express routes, mongoose Human Model, Human Controller
-- `yo react-app:form HumanForm div Human` : generate a form linked to Human data
-- `yo react-app:table HumansTable div Human` : generate a table linked to Human data
-- `yo react-app:list HumansList div Human` : generate a list(`<ul></ul>`) linked to Human data
 - `yo react-app:bbmc Human` generate Backbone a Human Model and Collection.js
-- `yo react-app:tablebb HumansTableBb div Human` generate a table linked to a Backbone Human Collection
-- `yo react-app:formbb HumanFormBb div Human` generate a form linked to a Backbone Human Model
-- `yo react-app:listbb HumansListBb div Human` generate a list linked to a Backbone Human Collection
-- `yo react-app:tab ApplicationTab div` create a "Bootstrap" Tab (and tab panes) inside a container (ie:`div`)
-- `yo react-app:shell MyComponent div` create a React Component skeleton
+- `yo react-app:formbb HumanForm Human` generate a form linked to a Backbone Human Model
+- `yo react-app:tablebb HumansTable Human` generate a table linked to a Backbone Human Collection
+- `yo react-app:listbb HumansList Human` generate a list linked to a Backbone Human Collection
+
+
+- `yo react-app:tab ApplicationTab` create a "Bootstrap" Tab (and tab panes) inside a container (ie:`div`)
+- `yo react-app:shell MyComponent tagName` create a React Component skeleton
 
 
 ##Getting Started
@@ -57,6 +58,7 @@ Type your application name (ie: `MyApplication`), then database name (ie: `mydat
 ####3-first launch
 
 - start MongoDb (`mongod`)
+- start `grunt watch`
 - start Application : `node app.js` (use node monitor it's useful)
 - open your webapp : [http://localhost:3000](http://localhost:3000)
 
@@ -79,7 +81,7 @@ Type `yo react-app:mgroutes Human` (where `Human` is the model name), then descr
 
 ####1-create human form
 
-Type `yo react-app:form HumanForm div Human` (where `HumanForm` is the React component Name, `div` the container tag, `Human` the associated model)
+Type `yo react-app:form HumanForm Human` (where `HumanForm` is the React component Name, `Human` the associated model)
 
     [?] model name (ie: Book) Human
     [?] fields (for UI) (ie : title, author)? firstName, lastName
@@ -91,11 +93,11 @@ Type `yo react-app:form HumanForm div Human` (where `HumanForm` is the React com
 
 1 new file is generated :
 
-    create public/js/components/HumanForm.js
+    create public/js/react_components/HumanForm.js
 
 ####2-create humans data table
 
-Type `yo react-app:table HumansTable div Human`
+Type `yo react-app:table HumansTable Human`
 
     [?] model name (ie: Book) Human
     [?] fields (for UI) (ie : title, author)? firstName, lastName
@@ -103,24 +105,31 @@ Type `yo react-app:table HumansTable div Human`
 
 1 new file is generated :
 
-    create public/js/components/HumansTable.js
+    create public/js/react_components/HumansTable.js
 
 ####3-integrate our 2 components
 
-Open `public/js/application/Application.js` and replace content with this :
+Open `public/js/modules/main.js` and replace content with this :
 
     /** @jsx React.DOM */
-    $(function() {
-       React.renderComponent(
-         <HumanForm id="human-form"/>,
-         document.querySelector('.humanform')
-       );
+    var React   = require('react');
+    var Backbone = require("backbone");
+    var About = require('../react_components/About');
 
-      React.renderComponent(
-        <HumansTable pollInterval={500} id="humans-table"/>,
-        document.querySelector('.humanstable')
-      );
-    });
+    var HumanForm = require('../react_components/HumanForm');
+    var HumansTable = require('../react_components/HumansTable');
+
+    Backbone.history.start();
+
+    React.renderComponent(
+      <HumansTable pollInterval={500}/>,
+      document.querySelector('HumansTable')
+    );
+
+    React.renderComponent(
+      <HumanForm/>,
+      document.querySelector('HumanForm')
+    );
 
 Then open `public/index.html` and replace :
 
@@ -137,9 +146,11 @@ by
 
     <div class="container">
       <div class="row">
-        <div class="col-md-6 humanform">
+        <div class="col-md-6">
+          <HumanForm/>
         </div>
-        <div class="col-md-6 humanstable">
+        <div class="col-md-6">
+          <HumansTable pollIntervall={500}/>
         </div>
       </div>
     </div>
@@ -148,7 +159,6 @@ You can now re-start `node app.js`. That's All!
 
 ##Other sub generators
 
-- List : `yo react-app:list HumansList div Human` create a list(`<ul></ul>`) linked to Human data
 - Tab : `yo react-app:tab ApplicationTab div` create a "Bootstrap" Tab (and tab panes) inside a container (ie:`div`)
 - Shell : `yo react-app:shell MyComponent div` create a React Component skeleton
 - **more to come** ... WIP
@@ -169,7 +179,7 @@ You can now re-start `node app.js`. That's All!
 
       render: function() {
         return (
-          <div id={this.props.id}>
+          <div>
             {this.state.content}
           </div>
         );
@@ -180,7 +190,7 @@ You can now re-start `node app.js`. That's All!
 
     /*--- javascript side ---*/
     React.renderComponent(
-      <MyComponent id={something}/>,
+      <MyComponent/>,
       document.querySelector('.mycomponent')
     );
 
@@ -188,6 +198,11 @@ You can now re-start `node app.js`. That's All!
     <div class="mycomponent"></div>
 
 ###Put components inside Tab component
+
+Add dependencies :
+
+    var HumanForm = require('./HumanForm');
+    var HumansTable = require('./HumansTable');
 
 This is the `render` method of a Tab component :
 
@@ -230,15 +245,20 @@ If you want to use our Form and Table components inside Tab component, it's simp
       </div>
     </div>
 
-and replace source code of `Application.js` by this :
+and replace source code of `main.js` by this :
 
     /** @jsx React.DOM */
-    $(function() {
-      React.renderComponent(
-        <ApplicationTab id="my-tab"/>,
-        document.querySelector('.applicationtab')
-      );
-    });
+    var React   = require('react');
+    var Backbone = require("backbone");
+
+    var BigTab = require('../react_components/BigTab');
+
+    Backbone.history.start();
+
+     React.renderComponent(
+     <BigTab id={"42"}/>,
+     document.querySelector('BigTab')
+     );
 
 and update `index.html` :
 
@@ -246,30 +266,27 @@ Replace
 
     <div class="container">
       <div class="row">
-        <div class="col-md-6 humanform">
+        <div class="col-md-6">
+          <HumanForm/>
         </div>
-        <div class="col-md-6 humanstable">
+        <div class="col-md-6">
+          <HumansTable pollIntervall={500}/>
         </div>
       </div>
     </div>
 
 By
 
-    <div class="container">
-      <div class="row applicationtab">
-      </div>
-    </div>
+  <div class="container">
+    <BigTab/>
+  </div>
 
 That's all
 
 ##Backbone generators
 
-- Model and Collection : `yo react-app:bbmc Human` generate `public/models/HumanModel.js` and `public/models/HumansCollection.js`
-- Table : `yo react-app:tablebb HumansTableBb div Human` create a data table linked to `HumansCollection` (Backbone collection)
-- Form : `yo react-app:formbb HumanFormBb div Human` create a form linked to `HumanModel` (Backbone Model)
-- List : `yo react-app:listbb HumansListBb div Human` create a list linked to `HumansCollection` (Backbone collection)
+- Model and Collection : `yo react-app:bbmc Human` generate `public/modules/models/HumanModel.js` and `public/modules/models/HumansCollection.js`
 
-**Remark**: Each time, `public/js/all.scripts.js` file is automatically updated
 
 ## License
 

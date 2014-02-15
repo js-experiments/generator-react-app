@@ -7,14 +7,10 @@ var ShellGenerator = module.exports = function ShellGenerator(args, options, con
 	this.componentName = arguments[0][0];
 	this.tagName = arguments[0][1];
 
-	this.on('end', function () {
-		require("../tools").scriptsList();
-	});
-
 };
 
 util.inherits(ShellGenerator, yeoman.generators.NamedBase);
 
 ShellGenerator.prototype.files = function files() {
-	this.template('shell.js',"public/js/components/"+this.componentName+".js")
+	this.template('shell.js',"public/js/react_components/"+this.componentName+".js")
 };

@@ -1,11 +1,14 @@
 /** @jsx React.DOM */
 
 /*
+	var <%= componentName %> = require('../react_components/<%= componentName %>'); 
 	React.renderComponent(
-		<<%= componentName %> id={something}/>,
-		document.querySelector('.<%= _.slugify(componentName) %>')
+		<<%= componentName %>/>,
+		document.querySelector('<%= componentName %>')
 	);
- */
+*/
+
+var React = require('react')
 
 var <%= componentName %> = React.createClass({
 
@@ -13,16 +16,16 @@ var <%= componentName %> = React.createClass({
 		return {content:"..."};
 	},
 
-	componentWillMount: function() {},
-
-	componentDidMount: function() {},
-
 	render: function() {
 		return (
-			<<%= tagName %> id={this.props.id}>
+			<<%= tagName %>>
 				{this.state.content}
 			</<%= tagName %>>
 		);
-	}
+	},
+	componentWillMount: function() {},
+	componentDidMount: function() {}
+
 });
 
+module.exports = <%= componentName %>;

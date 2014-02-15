@@ -1,11 +1,17 @@
 /** @jsx React.DOM */
 
 /*
- React.renderComponent(
-  <<%= componentName %> pollInterval={500}/>,
-  document.querySelector('.<%= _.slugify(componentName) %>')
- );
- */
+	var <%= componentName %> = require('../react_components/<%= componentName %>'); 
+	React.renderComponent(
+		<<%= componentName %> pollInterval={500}/>,
+		document.querySelector('<%= componentName %>')
+	);
+*/
+
+var React = require('react')
+	, Backbone = require("backbone")
+	, <%= modelName %>Model = require("../modules/models/<%= modelName %>Model")
+	, <%= modelName %>sCollection = require("../modules/models/<%= modelName %>sCollection");
 
 var <%= componentName %> = React.createClass({
 
@@ -13,59 +19,75 @@ var <%= componentName %> = React.createClass({
 		return {data : [], message : ""};
 	},
 
-	getAll<%= modelName %>s : function() {
-
-		this.<%= _.slugify(modelName) %>sCollection.fetch({
-			success: function(<%= _.slugify(modelName) %>s){
-				this.setState({data : <%= _.slugify(modelName) %>s.toJSON(), message : Date()});
-			}.bind(this),
-				error : function(err) {
-				this.setState({
-					message  : err.responseText + " " + err.statusText
-				});
-			}.bind(this)
-		});
-
-	},
-	componentDidMount: function() {},
-
-	componentWillMount: function() {
-
-		this.<%= _.slugify(modelName) %>sCollection = new <%= modelName %>sCollection();
-
-		this.getAll<%= modelName %>s();
-		setInterval(this.getAll<%= modelName %>s, this.props.pollInterval);
-	},
-
-
 	render: function() {
 
-		var rows = this.state.data.map(function(row){
+		var <%= _.slugify(modelName) %>sRows = this.state.data.map(function(<%= _.slugify(modelName) %>){
+			var deleteLink = "#delete_<%= _.slugify(modelName) %>/" + <%= _.slugify(modelName) %>._id;
+
 			return (
 				<tr>
-					<% _.each(fields, function(field) { %><td>{row.<%= field %>}</td>
+					<% _.each(fields, function(field) { %><td>{<%= _.slugify(modelName) %>.<%= field %>}</td>
 					<% }); %>
+					<td><a href={deleteLink}>delete{" "}{<%= _.slugify(modelName) %>._id}</a></td>
 				</tr>
-
 			);
 		});
 
 		return (
-			<<%= tagName %> className="table-responsive" id={this.props.id}>
-				<h2><%= componentName %></h2>
-
+			<div className="table-responsive">
+				<strong>{this.state.message}</strong>
 				<table className="table table-striped table-bordered table-hover" >
 					<thead>
 						<tr>
 							<% _.each(fields, function(field) { %><th><%= field %></th><% }); %>
+							<th>_id</th>
 						</tr>
 					</thead>
 					<tbody>
-						{rows}
+						{<%= _.slugify(modelName) %>sRows}
 					</tbody>
 				</table>
-			</<%= tagName %>>
+			</div>
 		);
+	},	
+
+	get<%= modelName %>s : function() {
+
+		var <%= _.slugify(modelName) %>s = new <%= modelName %>sCollection();
+
+		<%= _.slugify(modelName) %>s.fetch()
+			.done(function(data){
+				this.setState({data : <%= _.slugify(modelName) %>s.toJSON(), message : Date()});
+			}.bind(this))
+			.fail(function(err){
+				this.setState({
+					message  : err.responseText + " " + err.statusText
+				});
+			}.bind(this))
+	},
+	
+	componentWillMount: function() {
+		this.get<%= modelName %>s();
+		setInterval(this.get<%= modelName %>s, this.props.pollInterval);
+	},
+
+	componentDidMount: function() {
+		var Router = Backbone.Router.extend({
+			routes : {
+				"delete_<%= _.slugify(modelName) %>/:id" : "<%= _.slugify(modelName) %>"
+			},
+			initialize : function() {
+				console.log("Initialize router of <%= componentName %> component");
+			},
+			<%= _.slugify(modelName) %> : function(id){
+				console.log("=== delete <%= _.slugify(modelName) %> ===", id);
+				new <%= modelName %>Model({_id:id}).destroy();
+				this.navigate('/');
+			}
+		});
+		this.router = new Router()
 	}
+
 });
 
+module.exports = <%= componentName %>;

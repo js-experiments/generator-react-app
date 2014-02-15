@@ -1,39 +1,17 @@
-requirejs.config({
-	baseUrl : "js/",
-	paths   : {
-		"domReady"      : "bower_components/domready/ready.min",
-		"jquery"        : "bower_components/jquery/jquery.min",
-		"bootstrap"     : "bower_components/bootstrap/dist/js/bootstrap.min",
-		"text"          : "bower_components/text/text",
-		"showdown"      : "bower_components/showdown/compressed/showdown",
-		"jsx"           : "bower_components/require-jsx/jsx",
-		"JSXTransformer": "bower_components/react/JSXTransformer",
-		"react"         : "bower_components/react/react.min"
-	},
-	shim: {
-		JSXTransformer:{
-			exports: "JSXTransformer"
-		},
-		"bootstrap": {
-			deps: ["jquery"]
-		},
-		"showdown": {
-			"exports": "Showdown"   //attaches "Showdown" to the window object
-		}
-	}
-});
+/** @jsx React.DOM */
+var React   = require('react');
+var Backbone = require("backbone");
+var About = require('../react_components/About');
 
-require([
-	'domReady',
-	'jsx!application/Application'
-], function (domReady, Application) {
+Backbone.history.start();
 
-	domReady(function () {
-		console.log("DOM is ready!");
-		//$('body').css('visibility', 'visible');
-		window.App = new Application();
-	});
+React.renderComponent(
+<About docLocation="js/docs/about_my_app.md"/>,
+	document.querySelector('.about_my_app')
+);
 
-});
-
+React.renderComponent(
+<About docLocation="js/docs/about_how_to.md"/>,
+	document.querySelector('.about_how_to')
+);
 

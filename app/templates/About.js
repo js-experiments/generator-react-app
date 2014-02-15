@@ -1,21 +1,22 @@
 /** @jsx React.DOM */
+var React = require('react')
+	, $ = window.jQuery = require("jquery")
+	, markdown = require( "markdown" ).markdown;
 
-var AboutComponent = React.createClass({
-
-	componentWillMount: function() {},
+var About = React.createClass({
 
 	componentDidMount: function() {
-		var converter = new Showdown.converter();
-			$.get(this.props.docLocation, function(data) {
-				$("#"+this.props.id).html(converter.makeHtml(data))
-			}.bind(this));
+		$.get(this.props.docLocation, function(data) {
+			this.refs.content.getDOMNode().innerHTML = markdown.toHTML(data)
+		}.bind(this));
 	},
 
 	render: function() {
 		return (
-			<div id={this.props.id}>
-				{this.content}
+			<div ref="content">
 			</div>
 		);
 	}
 });
+
+module.exports = About

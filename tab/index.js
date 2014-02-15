@@ -5,11 +5,8 @@ var yeoman = require('yeoman-generator');
 var TableGenerator = module.exports = function TableGenerator(args, options, config) {
   yeoman.generators.NamedBase.apply(this, arguments);
 	this.componentName = arguments[0][0];
-	this.tagName = arguments[0][1];
+	//this.tagName = arguments[0][1];
 
-	this.on('end', function () {
-		require("../tools").scriptsList();
-	});
 };
 
 util.inherits(TableGenerator, yeoman.generators.NamedBase);
@@ -35,5 +32,5 @@ TableGenerator.prototype.askFor = function askFor() {
 };
 
 TableGenerator.prototype.files = function files() {
-	this.template('tab.js',"public/js/components/"+this.componentName+".js")
+	this.template('tab.js',"public/js/react_components/"+this.componentName+".js")
 };

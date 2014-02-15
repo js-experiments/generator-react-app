@@ -5,12 +5,10 @@ var yeoman = require('yeoman-generator');
 var TablebbGenerator = module.exports = function TablebbGenerator(args, options, config) {
   yeoman.generators.NamedBase.apply(this, arguments);
 	this.componentName = arguments[0][0];
-	this.tagName = arguments[0][1];
-	this.modelName = arguments[0][2];
+	//this.tagName = arguments[0][1];
+	this.modelName = arguments[0][1];
 
-	this.on('end', function () {
-		require("../tools").scriptsList();
-	});
+	//this.on('end', function () { });
 };
 
 util.inherits(TablebbGenerator, yeoman.generators.NamedBase);
@@ -50,5 +48,5 @@ TablebbGenerator.prototype.askFor = function askFor() {
 };
 
 TablebbGenerator.prototype.files = function files() {
-	this.template('table.js',"public/js/components/"+this.componentName+".js")
+	this.template('table.js',"public/js/react_components/"+this.componentName+".js")
 };
