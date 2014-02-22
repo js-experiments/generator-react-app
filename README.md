@@ -81,7 +81,7 @@ Type `yo react-app:mgroutes Human` (where `Human` is the model name), then descr
 
 ####1-create human form
 
-Type `yo react-app:form HumanForm Human` (where `HumanForm` is the React component Name, `Human` the associated model)
+Type `yo react-app:formbb HumanForm Human` (where `HumanForm` is the React component Name, `Human` the associated model)
 
     [?] model name (ie: Book) Human
     [?] fields (for UI) (ie : title, author)? firstName, lastName
@@ -97,7 +97,7 @@ Type `yo react-app:form HumanForm Human` (where `HumanForm` is the React compone
 
 ####2-create humans data table
 
-Type `yo react-app:table HumansTable Human`
+Type `yo react-app:tablebb HumansTable Human`
 
     [?] model name (ie: Book) Human
     [?] fields (for UI) (ie : title, author)? firstName, lastName

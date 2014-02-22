@@ -74,12 +74,12 @@ var <%= componentName %> = React.createClass({
 	componentDidMount: function() {
 		var Router = Backbone.Router.extend({
 			routes : {
-				"delete_<%= _.slugify(modelName) %>/:id" : "<%= _.slugify(modelName) %>"
+				"delete_<%= _.slugify(modelName) %>/:id" : "delete<%= modelName %>"
 			},
 			initialize : function() {
 				console.log("Initialize router of <%= componentName %> component");
 			},
-			<%= _.slugify(modelName) %> : function(id){
+			delete<%= modelName %> : function(id){
 				console.log("=== delete <%= _.slugify(modelName) %> ===", id);
 				new <%= modelName %>Model({_id:id}).destroy();
 				this.navigate('/');
