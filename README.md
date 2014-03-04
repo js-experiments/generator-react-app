@@ -77,6 +77,13 @@ Type `yo react-app:mgroutes Human` (where `Human` is the model name), then descr
 
 **Remark**: Each time, `./all.routes.js` file is automatically updated (to load all routes)
 
+###Add Backbone Model and Collection
+
+Type `yo react-app:bbmc Human`, it generates 2 files:
+
+- `public/modules/models/HumanModel.js`
+- `public/modules/models/HumansCollection.js`
+
 ###You need form and data table
 
 ####1-create human form

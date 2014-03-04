@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 var React   = require('react');
 var Backbone = require("backbone");
+Backbone.$ = window.$ = require("jquery")
+
 var About = require('../react_components/About');
 
 Backbone.history.start();
