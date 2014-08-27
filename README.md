@@ -284,9 +284,9 @@ Replace
 
 By
 
-  <div class="container">
-    <BigTab/>
-  </div>
+    <div class="container">
+       <BigTab/>
+    </div>
 
 That's all
 
